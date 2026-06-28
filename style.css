@@ -1,0 +1,429 @@
+/* =============================================
+   PALETTE
+   bg:        #1a0a10  (deep dark rose)
+   surface:   #ff9cbe  (soft pink envelope)
+   accent:    #f06292  (medium pink)
+   deep:      #c2185b  (deep rose / folds)
+   paper:     #fff0f5  (letter paper)
+   text:      #5a1a2e  (dark rose text)
+   cloud:     #ffc0d8  (cloud pink)
+   ============================================= */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 30%, #3d0d1e 0%, #1a0510 60%, #0d0008 100%);
+  font-family: 'Quicksand', sans-serif;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ─── Background floating hearts ─── */
+.bg-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-heart {
+  position: absolute;
+  color: #f06292;
+  opacity: 0;
+  animation: floatUp var(--dur) ease-in infinite;
+  animation-delay: var(--delay);
+  font-size: var(--size);
+  left: var(--x);
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.6; }
+  80%  { opacity: 0.3; }
+  100% { transform: translateY(-110vh) scale(0.6) rotate(30deg); opacity: 0; }
+}
+
+/* ─── Clouds ─── */
+.clouds {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cloud {
+  position: absolute;
+  background: #ffc0d8;
+  border-radius: 50px;
+  opacity: 0.85;
+  animation: driftCloud linear infinite;
+}
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+/* Bottom row clouds */
+.cloud-1 { width: 200px; height: 60px; bottom: 0; left: -10%; animation-duration: 28s; animation-delay: 0s; }
+.cloud-1::before { width: 90px; height: 90px; top: -40px; left: 20px; }
+.cloud-1::after  { width: 70px; height: 70px; top: -30px; left: 90px; }
+
+.cloud-2 { width: 160px; height: 50px; bottom: 0; left: 25%; animation-duration: 32s; animation-delay: -8s; }
+.cloud-2::before { width: 80px; height: 80px; top: -35px; left: 15px; }
+.cloud-2::after  { width: 60px; height: 60px; top: -25px; left: 75px; }
+
+.cloud-3 { width: 220px; height: 65px; bottom: 0; left: 55%; animation-duration: 24s; animation-delay: -4s; }
+.cloud-3::before { width: 100px; height: 100px; top: -45px; left: 25px; }
+.cloud-3::after  { width: 80px;  height: 80px;  top: -35px; left: 110px; }
+
+/* Top row clouds */
+.cloud-4 { width: 180px; height: 55px; top: 5%; left: -5%; animation-duration: 36s; animation-delay: -12s; opacity: 0.5; }
+.cloud-4::before { width: 85px; height: 85px; top: -38px; left: 18px; }
+.cloud-4::after  { width: 65px; height: 65px; top: -28px; left: 85px; }
+
+.cloud-5 { width: 140px; height: 45px; top: 8%; left: 40%; animation-duration: 30s; animation-delay: -18s; opacity: 0.5; }
+.cloud-5::before { width: 70px; height: 70px; top: -32px; left: 12px; }
+.cloud-5::after  { width: 55px; height: 55px; top: -22px; left: 68px; }
+
+.cloud-6 { width: 190px; height: 58px; top: 3%; left: 72%; animation-duration: 26s; animation-delay: -6s; opacity: 0.5; }
+.cloud-6::before { width: 90px; height: 90px; top: -40px; left: 22px; }
+.cloud-6::after  { width: 70px; height: 70px; top: -30px; left: 92px; }
+
+@keyframes driftCloud {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(60px); }
+  100% { transform: translateX(0); }
+}
+
+/* ─── Scene container ─── */
+.scene {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ─── Decorative hearts above envelope ─── */
+.deco-hearts {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: -8px;
+}
+
+.deco-heart {
+  color: #f06292;
+  animation: heartPulse 1.6s ease-in-out infinite;
+}
+.deco-heart.h1 { font-size: 18px; animation-delay: 0s; }
+.deco-heart.h2 { font-size: 28px; animation-delay: 0.3s; color: #e91e63; }
+.deco-heart.h3 { font-size: 18px; animation-delay: 0.6s; }
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50%       { transform: scale(1.25) translateY(-4px); }
+}
+
+/* ─── Envelope wrapper ─── */
+.envelope-wrapper {
+  position: relative;
+  width: 320px;
+  height: 230px;
+  perspective: 900px;
+}
+
+/* ─── Envelope ─── */
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 230px;
+  filter: drop-shadow(0 20px 40px rgba(240, 98, 146, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+  transform: translateY(-4px);
+}
+
+/* Envelope body base */
+.env-body {
+  position: absolute;
+  inset: 0;
+  background: #ff9cbe;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Left fold triangle */
+.env-left-fold {
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 230px 0 0 160px;
+  border-color: transparent transparent transparent #f06292;
+  opacity: 0.7;
+}
+
+/* Right fold triangle */
+.env-right-fold {
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 230px 160px 0 0;
+  border-color: transparent #f06292 transparent transparent;
+  opacity: 0.7;
+}
+
+/* Bottom fold */
+.env-bottom-fold {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 160px 115px 160px;
+  border-color: transparent transparent #e91e63 transparent;
+  opacity: 0.55;
+}
+
+/* ─── FLAP (top triangle) ─── */
+.flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 115px 160px 0 160px;
+  border-color: #f48fb1 transparent transparent transparent;
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+/* Flap open */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* ─── Letter preview (shows through top before opening) ─── */
+.letter-preview {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  background: #fff0f5;
+  border-radius: 4px;
+  padding: 18px 16px 14px;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 15px;
+  color: #c2185b;
+  line-height: 1.6;
+  box-shadow: 0 2px 12px rgba(194,24,91,0.15);
+  z-index: 2;
+  transition: opacity 0.3s;
+}
+
+/* ─── Letter that flies out ─── */
+.letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 30%) scale(0.85);
+  width: min(360px, 88vw);
+  max-height: 75vh;
+  background: #fff0f5;
+  border-radius: 10px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 12px 48px rgba(194,24,91,0.35);
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  transition:
+    transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.5s ease;
+  transition-delay: 0s;
+}
+
+.letter.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: all;
+  transition-delay: 0.45s;
+  z-index: 50;
+}
+
+/* Dimmed overlay behind letter */
+.letter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 0, 10, 0.55);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  transition-delay: 0.3s;
+  backdrop-filter: blur(3px);
+}
+
+.letter-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.letter-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.heart-stamp {
+  font-size: 22px;
+  color: #e91e63;
+  animation: heartPulse 1.8s ease-in-out infinite;
+}
+
+.letter-content {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  color: #5a1a2e;
+  line-height: 1.85;
+}
+
+.letter-greeting {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  color: #c2185b;
+  margin-bottom: 12px;
+}
+
+.letter-content p {
+  margin-bottom: 12px;
+}
+
+.letter-sign {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  color: #c2185b;
+  margin-top: 16px;
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* ─── Scrollbar for letter ─── */
+.letter::-webkit-scrollbar { width: 4px; }
+.letter::-webkit-scrollbar-track { background: transparent; }
+.letter::-webkit-scrollbar-thumb { background: #f48fb1; border-radius: 4px; }
+
+/* ─── CTA Button ─── */
+.open-btn {
+  background: linear-gradient(135deg, #f06292, #e91e63);
+  color: #fff;
+  border: none;
+  padding: 14px 42px;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 24px rgba(233, 30, 99, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.open-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 32px rgba(233, 30, 99, 0.55);
+}
+
+.open-btn:active {
+  transform: scale(0.97);
+}
+
+.open-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* ─── Close button ─── */
+.close-btn {
+  background: transparent;
+  color: #f48fb1;
+  border: 2px solid #f48fb1;
+  padding: 9px 28px;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+  transform: translateY(6px);
+  position: relative;
+  z-index: 5;
+}
+
+.close-btn:hover {
+  background: rgba(244, 143, 177, 0.15);
+  transform: translateY(0);
+}
+
+.close-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+/* ─── Burst hearts on open ─── */
+.burst-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+  color: #f06292;
+  font-size: 22px;
+  animation: burst 1s ease-out forwards;
+}
+
+@keyframes burst {
+  0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.3); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 420px) {
+  .envelope-wrapper,
+  .envelope {
+    width: 280px;
+    height: 200px;
+  }
+  .flap {
+    border-width: 100px 140px 0 140px;
+  }
+  .env-left-fold  { border-width: 200px 0 0 140px; }
+  .env-right-fold { border-width: 200px 140px 0 0; }
+  .env-bottom-fold { border-width: 0 140px 100px 140px; }
+  .letter { width: 86%; }
+  .open-btn { padding: 12px 32px; font-size: 15px; }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .bg-heart, .deco-heart, .cloud { animation: none; }
+  .letter, .flap { transition: none; }
+}

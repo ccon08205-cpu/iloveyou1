@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Thư Tình</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+ <audio id="sound" src="yeuemratnhieu.mp3" loop></audio>
+
+
+  <!-- Nền tim bay (tự động, không cần chỉnh) -->
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <!-- Mây trang trí (tự động, không cần chỉnh) -->
+  <div class="clouds">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+    <div class="cloud cloud-5"></div>
+    <div class="cloud cloud-6"></div>
+  </div>
+
+  <!-- Khung chính -->
+  <div class="scene">
+
+    <!-- Tim trang trí nhỏ phía trên phong bì (tự động) -->
+    <div class="deco-hearts">
+      <span class="deco-heart h1">♥</span>
+      <span class="deco-heart h2">♥</span>
+      <span class="deco-heart h3">♥</span>
+    </div>
+
+    <!-- Phong bì (không cần chỉnh) -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+      <div class="envelope" id="envelope">
+        <div class="flap" id="flap"></div>
+        <div class="env-body">
+          <div class="env-left-fold"></div>
+          <div class="env-right-fold"></div>
+          <div class="env-bottom-fold"></div>
+        </div>
+
+        <!-- ╔══════════════════════════════════════════════════════════╗
+             ║  👀 CHỮ HIỆN TRÊN PHONG BÌ (trước khi mở)              ║
+             ║  → Dòng chữ nhỏ nhìn thấy qua miệng phong bì            ║
+             ╚══════════════════════════════════════════════════════════╝ -->
+        <div class="letter-preview" id="letterPreview">
+          <p>Anh viết những dòng này không<br />phải vì nhất thời rung động.</p>
+        </div>
+
+      </div>
+
+      <!-- Lớp mờ phía sau thư (tự động, click để đóng) -->
+      <div class="letter-overlay" id="letterOverlay" onclick="closeEnvelope()"></div>
+
+      <div class="letter" id="letter">
+        <div class="letter-inner">
+          <div class="letter-header">
+            <span class="heart-stamp">♥</span>
+          </div>
+          <div class="letter-content">
+
+            <!-- Lời chào mở đầu -->
+            <p class="letter-greeting">Gửi: Võ Thị Kim Nhung</p>
+
+            <!-- Đoạn 1 -->
+            <p>
+             My profile:</p>
+             <p> Name: Triệu Văn Huy</p>
+            <p> Year: 22/01/2006</p>
+             <p>Profession: Sinh viên</p>
+            <p>Hobbies: Nghe nhạc, chơi game, xem phim, và NGỦ</p>
+            <p>Experience: Chưa từng có kinh nghiệm lâu dài ( muốn biết thêm thì hỏi bất cứ điều gì )</p>
+          <p> Note: Một chàng trai tự ti, nhạy cảm, nhạt và cực kì nhạt, đặc biệt có trái tim thủy tinh.</p>
+            
+            
+            <p>
+                Vị trí muốn ứng tuyển:
+            </p>
+            <p> Mong muốn được ứng tuyển vào vị trí "Người Yêu" để chính thức có cơ hội quan tâm, lo lắng và làm cậu vui mỗi ngày.</p>
+            <p>
+             Mình viết những lời này không phải vì một chút động lòng hay vì rung động nhất thời. Trong khoảng thời gian quen biết và trò chuyện mình cảm nhận được ở 
+             cậu có một thứ gì đó rất đặc biệt. Mình biết bản thân chưa đủ hoàn hảo, và cũng không nổi bật hay có gì đặc biệt cả. Nhưng mình vẫn muốn thử sức bản thân. Mình sợ 
+             sợ nếu bỏ lỡ thì sẽ không có cơ hội nữa. Nên là có thể cho mình một cơ hội không?
+            </p>
+
+            <!-- Chữ ký cuối thư -->
+            <p class="letter-sign">
+              Huy<br />
+              <strong>Triệu Văn Huy</strong>
+            </p>
+
+          </div>
+        </div>
+      </div>
+      <!-- ═══ HẾT NỘI DUNG THƯ ═══ -->
+
+    </div>
+
+    <!-- ╔══════════════════════════════════════════╗
+         ║  🔘 CHỮ TRÊN NÚT BẤM                    ║
+         ╚══════════════════════════════════════════╝ -->
+    <button class="open-btn" id="openBtn" onclick="openEnvelope()">
+      <span>Mở thư ✉</span>
+    </button>
+
+    <!-- Nút đóng (tự động hiện sau khi mở) -->
+    <button class="close-btn" id="closeBtn" onclick="closeEnvelope()">
+      ✕ Đóng lại
+    </button>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
